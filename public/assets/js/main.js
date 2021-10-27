@@ -91,6 +91,7 @@ function closePhonebookForm() {
 function openPhonebookForm() {
     document.getElementById('phonebook_form').style.display = 'block';
     resetForm();
+    document.getElementById('form_full_name').focus();
 }
 
 function savePhonebookForm() {
@@ -125,4 +126,14 @@ function savePhonebookForm() {
 
 onLoad(function () {
     loadList();
+
+    document.getElementById('form_full_name').addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            savePhonebookForm();
+        }
+    });
 });
