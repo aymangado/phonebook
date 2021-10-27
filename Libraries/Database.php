@@ -16,6 +16,9 @@ class Database
     public function phoneBookList()
     {
         $list = $this->pdo->query('SELECT * FROM phonebook')->fetchAll(PDO::FETCH_ASSOC);
+        if (!$list) {
+            return [];
+        }
         $in = [];
         foreach ($list as $key => $item) {
             $in[] = $item['id'];
