@@ -82,8 +82,15 @@ table.phonebook-list-table td, table.phonebook-list-table th {
 table.phonebook-list-table thead th.th-id {
     width: 40px;
 }
+table.phonebook-list-table thead th.th-manage {
+    width: 30px;
+}
 table.phonebook-list-table tbody td {
     font-size: 13px;
+}
+table.phonebook-list-table tbody td .delete-button {
+    width: 20px;
+    cursor: pointer;
 }
 table.phonebook-list-table thead {
     background: #D7EFE5;

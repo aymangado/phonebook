@@ -23,6 +23,8 @@ function fire()
         (new Controllers\PhonebookController)->all();
     } else if (end($uri_parts) == 'create_new_phonebook' AND $request_method === 'post') {
         (new Controllers\PhonebookController)->createNewPhonebook();
+    } else if (end($uri_parts) == 'delete_phonebook' AND $request_method === 'post') {
+        (new Controllers\PhonebookController)->deletePhonebook();
     }
 }
 

@@ -10,7 +10,7 @@ class Database
 
     public function __construct()
     {
-        $this->pdo = new PDO("mysql:host=".env('MYSQL_HOST').";port=".env('MYSQL_PORT').";dbname=".env('MYSQL_DATABASE'), env('MYSQL_USER'), env('MYSQL_PASSWORD'),  array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+        $this->pdo = new PDO("mysql:host=" . env('MYSQL_HOST') . ";port=" . env('MYSQL_PORT') . ";dbname=" . env('MYSQL_DATABASE'), env('MYSQL_USER'), env('MYSQL_PASSWORD'), array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
 
     public function phoneBookList()
@@ -23,7 +23,7 @@ class Database
         foreach ($list as $key => $item) {
             $in[] = $item['id'];
         }
-        $phone_numbers = $this->pdo->query('SELECT * FROM phone_numbers WHERE phonebook_id IN('.implode(',', $in).')')->fetchAll(PDO::FETCH_ASSOC);
+        $phone_numbers = $this->pdo->query('SELECT * FROM phone_numbers WHERE phonebook_id IN(' . implode(',', $in) . ')')->fetchAll(PDO::FETCH_ASSOC);
         foreach ($list as $key => $item) {
             $list[$key]['phone_numbers'] = [];
             foreach ($phone_numbers as $phone_number_item) {
@@ -33,6 +33,17 @@ class Database
             }
         }
         return $list;
+    }
+
+    public function deletePhonebook($id)
+    {
+        $statement = $this->pdo->prepare('DELETE FROM phonebook WHERE id = :id');
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+
+        $statement = $this->pdo->prepare('DELETE FROM phone_numbers WHERE phonebook_id = :phonebook_id');
+        $statement->bindParam(':phonebook_id', $id, PDO::PARAM_INT);
+        $statement->execute();
     }
 
     public function insertPhoneBook($name, $numbersList)
@@ -48,9 +59,8 @@ class Database
             $binds["type_{$key}"] = $item['type'];
         }
         if (!empty($values) && !empty($binds)) {
-            $statement = $this->pdo->prepare('INSERT INTO phone_numbers (phonebook_id, phone_number, type) VALUES'. implode(',', $values));
-            foreach($binds as $key => $value)
-            {
+            $statement = $this->pdo->prepare('INSERT INTO phone_numbers (phonebook_id, phone_number, type) VALUES' . implode(',', $values));
+            foreach ($binds as $key => $value) {
                 $statement->bindValue($key, $value);
             }
             $statement->execute();

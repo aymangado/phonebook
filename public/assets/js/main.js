@@ -43,7 +43,9 @@ function loadList() {
     get('http://localhost:8000/api.php/phonebook', function (response) {
         if (response.length === 0) {
             document.getElementById('no_phonebook_list').style.display = 'block';
+            document.getElementById('phonebook_list_table').style.display = 'none';
         } else {
+            document.getElementById('no_phonebook_list').style.display = 'none';
             document.getElementById('phonebook_list').innerHTML = '';
             for (var i = 0; i < response.length; i++) {
                 var item = response[i];
@@ -52,11 +54,11 @@ function loadList() {
 
                 var id_td = document.createElement('td');
                 id_td.innerText = item.id;
-                tr.appendChild(id_td)
+                tr.appendChild(id_td);
 
                 var full_name_td = document.createElement('td');
                 full_name_td.innerText = item.full_name;
-                tr.appendChild(full_name_td)
+                tr.appendChild(full_name_td);
 
                 var numbers_td = document.createElement('td');
                 numbers_td.innerText = '';
@@ -66,7 +68,18 @@ function loadList() {
                         numbers_td.innerText += ' || ';
                     }
                 }
-                tr.appendChild(numbers_td)
+                tr.appendChild(numbers_td);
+
+                var manage_td = document.createElement('td');
+                var delete_button = document.createElement('img');
+                delete_button.classList.add('delete-button');
+                delete_button.setAttribute('data-id', item.id);
+                delete_button.addEventListener('click', function (event) {
+                    deleteContact(event.target.getAttribute('data-id'));
+                });
+                delete_button.src = 'assets/images/delete.svg';
+                manage_td.appendChild(delete_button);
+                tr.appendChild(manage_td)
 
                 document.getElementById('phonebook_list').appendChild(tr);
 
@@ -92,6 +105,14 @@ function openPhonebookForm() {
     document.getElementById('phonebook_form').style.display = 'block';
     resetForm();
     document.getElementById('form_full_name').focus();
+}
+
+function deleteContact(id) {
+    post('http://localhost:8000/api.php/delete_phonebook', {
+        "id": id,
+    }, function () {
+        loadList();
+    });
 }
 
 function savePhonebookForm() {
