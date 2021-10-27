@@ -2,6 +2,11 @@
     font-family: Arial, sans-serif;
 }
 
+body {
+    font-size: 14px;
+    background-color: #FFFFFF;
+}
+
 .container {
     min-height: 100px;
     margin: 0 auto;
@@ -101,4 +106,100 @@ table.phonebook-list-table tfoot {
 }
 table.phonebook-list-table tfoot td {
     font-size: 14px;
+}
+
+.add-new-phonebook-button {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    color: #ffffff;
+    background: #1CA46C;
+    padding: 5px 20px;
+    text-decoration: none;
+    margin: 0 0 10px 0;
+    float: right;
+    cursor: pointer;
+}
+
+.add-new-phonebook-button:hover {
+    background: #1F7A55;
+    text-decoration: none;
+}
+
+#phonebook_list_table {
+    display: none;
+}
+
+#no_phonebook_list {
+    display: none;
+    text-align: center;
+}
+
+#phonebook_form {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+#phonebook_form .phonebook-form-content-back {
+    margin: 0 auto;
+    max-width: 300px;
+    background-color: rgba(0, 0, 0, .1);
+    padding: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#phonebook_form .phonebook-form-content {
+    background-color: #1CA46C;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    min-height: 100px;
+    position: relative;
+}
+
+#phonebook_form .phonebook-form-content .phonebook-form-close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+#phonebook_form .phonebook-form-content .phonebook-form-close img {
+    width: 24px;
+}
+
+#phonebook_form .phonebook-form-content .phonebook-form-body {
+    padding: 35px 5px 5px 5px;
+    color: #FFFFFF;
+}
+
+#phonebook_form .phonebook-form-content .phonebook-form-body label span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#phonebook_form .phonebook-form-content .phonebook-form-body label input[type="text"] {
+    border: #EEEEEE 1px solid;
+    outline: none;
+    width: 100%;
+}
+
+#phonebook_form .phonebook-form-content .phonebook-form-body .add-new-phonebook-save-button {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    color: #1CA46C;
+    background: #ffffff;
+    padding: 5px 20px;
+    text-decoration: none;
+    margin: 10px 0 0 0;
+    float: right;
+    cursor: pointer;
 }

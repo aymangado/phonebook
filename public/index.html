@@ -18,7 +18,30 @@
             <div class="clearfix"></div>
         </div>
         <div class="content">
-            <table class="phonebook-list-table">
+
+            <div id="phonebook_form">
+                <div class="phonebook-form-content-back">
+                    <div class="phonebook-form-content">
+                        <div class="phonebook-form-close" onclick="closePhonebookForm()">
+                            <img src="assets/images/close.svg" alt="">
+                        </div>
+                        <div class="phonebook-form-body">
+                            <label>
+                                <span>Full name</span>
+                                <input type="text" id="form_full_name">
+                            </label>
+
+                            <div class="add-new-phonebook-save-button" onclick="savePhonebookForm()">Save</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="add-new-phonebook-button" onclick="openPhonebookForm()">Add new</div>
+            <div class="clearfix"></div>
+            <div id="no_phonebook_list">There is no contact in your phonebook</div>
+            <table class="phonebook-list-table" id="phonebook_list_table">
                 <thead>
                 <tr>
                     <th class="th-id">#</th>
@@ -32,6 +55,6 @@
         </div>
     </div>
 
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js?r=1"></script>
 </body>
 </html>
