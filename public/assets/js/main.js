@@ -35,6 +35,10 @@ function post(url, json, callback) {
     }
 }
 
+function pad(n) {
+    return (n < 10) ? ("0" + n) : n;
+}
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -102,6 +106,12 @@ function loadList() {
                 }
                 tr.appendChild(numbers_td);
 
+                var updated_date_td = document.createElement('td');
+                updated_date_td.style.whiteSpace = 'nowrap';
+                var updated_date = new Date(item.updated_date);
+                updated_date_td.innerText = pad(updated_date.getHours()) + ':' + pad(updated_date.getMinutes()) + ':' + pad(updated_date.getSeconds()) + ' - ' + updated_date.getDate() + '/' + updated_date.getMonth() + '/' + updated_date.getFullYear();
+                tr.appendChild(updated_date_td);
+
                 var manage_td = document.createElement('td');
                 var delete_button = document.createElement('img');
                 delete_button.classList.add('delete-button');
@@ -111,7 +121,7 @@ function loadList() {
                 });
                 delete_button.src = 'assets/images/delete.svg';
                 manage_td.appendChild(delete_button);
-                tr.appendChild(manage_td)
+                tr.appendChild(manage_td);
 
                 document.getElementById('phonebook_list').appendChild(tr);
 
