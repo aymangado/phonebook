@@ -1,0 +1,5 @@
+.DS_Store
+/docker/data
+.env
+/.idea
+/.vscode

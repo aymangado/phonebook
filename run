@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+project_name='phonebook'
+
+declare -a options
+declare -A commands
+declare -a commandsNumeric
+declare -a optionsForHelp
+-() {
+    options[${#options[*]} + 1]=$1
+    commands[${1,,}]=$2
+    commandsNumeric[${#options[*]}]=$2
+    optionsForHelp[${#options[*]}]="$(tput bold)${#options[*]})$(tput sgr0) $1"
+}
+
+#####################################################################################################################
+- "Start"                                 "cd docker && docker-compose --env-file ../.env -p ${project_name} up -d"
+- "Stop"                                  "cd docker && docker-compose --env-file ../.env -p ${project_name} stop"
+- "Down"                                  "cd docker && docker-compose --env-file ../.env -p ${project_name} down"
+- "Rebuild_images_then_start"             "cd docker && docker-compose --env-file ../.env -p ${project_name} up --build -d"
+- "Recreate_containers_then_start"        "cd docker && docker-compose --env-file ../.env -p ${project_name} up --force-recreate -d"
+- "Pause"                                 "cd docker && docker-compose --env-file ../.env -p ${project_name} pause"
+- "Resume"                                "cd docker && docker-compose --env-file ../.env -p ${project_name} unpause"
+- "Import_database"                       "cd docker && docker-compose --env-file ../.env -p ${project_name} exec mysql bash -c \"pv --name 'Importing' '/database_backup/schema.sql' | mysql --default-character-set=utf8 -h localhost -u dev -pRe3WzWr8ItK2R phonebook\""
+- "Remove_data_directory"                 "rm -Rf docker/data"
+#####################################################################################################################
+
+_eval() {
+    echo -e "\n" &&
+    echo -e "\e[37m$(printf %50s |tr " " "_")\e[0m" &&
+    echo -e "\e[1m\e[32mStart\e[94m ⫸ ${1}\e[0m\n" &&
+    eval "${@:2}"
+    echo -e "\n\e[1m\e[31mFinish\e[94m ⫸ ${1}\e[0m" &&
+    echo -e "\e[37m$(printf %50s |tr " " "_")\e[0m" &&
+    echo -e "\n"
+}
+
+COLUMNS=200
+if [[ ! -z "$1" ]]; then
+    if [[ $1 =~ ^-?[0-9]+$ ]]; then
+        _eval "${options[${1}]}" "${commandsNumeric[${1}]}"
+    else
+        if [[ $1 == '--help' ]] || [[ $1 == '-h' ]]; then
+            for option in "${optionsForHelp[@]}"; do
+                printf "%-40s\n" "${option}"
+            done | column
+        elif [[ $1 == 'need' ]] || [[ $1 == '@' ]] || [[ $1 == '.' ]]; then
+            if [[ -x "$(command -v docker)" ]]; then
+                _eval "Run php command in php docker container from ▲ outside" "${d} exec -u $UID php ./php need ${@:2}"
+            else
+                _eval "Run php command" "./php need ${@:2}"
+            fi
+        else
+            _eval "${*,,}" "${commands[${*,,}]}"
+        fi
+    fi
+    exit
+fi
+
+COLUMNS=170
+PS3='● Please enter your choice: '
+select option in "${options[@]}"
+do
+    _eval "${option,,}" "${commands[${option,,}]}"
+    break
+done

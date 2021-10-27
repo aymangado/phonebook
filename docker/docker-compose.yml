@@ -1,0 +1,46 @@
+version: '3'
+services:
+    web:
+        image: nginx:1.21.3
+        volumes:
+            - "./etc/nginx/default.template.conf:/etc/nginx/conf.d/default.template"
+            - "./etc/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+            - "../:/var/www/html"
+        ports:
+            - "8000:80"
+            - "3000:443"
+        env_file:
+            - ../.env
+        environment:
+            - NGINX_HOST=${NGINX_HOST}
+        command: /bin/bash -c "envsubst '$$NGINX_HOST' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+        restart: "no"
+        depends_on:
+            - php
+            - mysql
+
+    php:
+        image: nanoninja/php-fpm:7.4.10
+        restart: "no"
+        volumes:
+            - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+            - "../:/var/www/html"
+
+    mysql:
+        build:
+              context: ./mysql
+        restart: "no"
+        command: mysqld --sql_mode=""
+        env_file:
+            - ../.env
+        environment:
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_ROOT_USER=root
+            - MYSQL_ROOT_PASSWORD=Tz6WidUztL9P
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - "8989:3306"
+        volumes:
+            - "./data/db/mysql:/var/lib/mysql"
+            - "../database_backup:/database_backup"
