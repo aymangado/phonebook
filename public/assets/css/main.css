@@ -69,6 +69,16 @@ body {
     color: #1CA46C;
 }
 
+@media (max-width: 576px) {
+    .container .header .logo img {
+        width: 60px;
+    }
+    .container .header .logo .title {
+        font-size: 26px;
+        margin-left: 5px;
+    }
+}
+
 table.phonebook-list-table {
     border: 2px solid #1CA46C;
     width: 100%;
@@ -79,6 +89,13 @@ table.phonebook-list-table td, table.phonebook-list-table th {
     border: 1px solid #1CA46C;
     padding: 5px 4px;
 }
+
+@media (max-width: 576px) {
+    table.phonebook-list-table tr > td:nth-child(4), table.phonebook-list-table tr > th:nth-child(4) {
+        display: none;
+    }
+}
+
 table.phonebook-list-table thead th.th-id {
     width: 40px;
 }
@@ -196,7 +213,7 @@ table.phonebook-list-table tfoot td {
 #phonebook_form .phonebook-form-content .phonebook-form-body label .error {
     display: none;
     margin-top: 5px;
-    background-color: #FFD0D0;
+    background-color: #FFEAEA;
     color: #C93232;
     padding: 3px 5px;
     -webkit-border-radius: 3px;
