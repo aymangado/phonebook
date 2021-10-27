@@ -80,13 +80,14 @@ function loadList() {
                 tr.appendChild(id_td);
 
                 var full_name_td = document.createElement('td');
-                full_name_td.innerText = item.full_name;
-                full_name_td.setAttribute('data-id', item.id);
-                full_name_td.addEventListener('click', function (event) {
+                var full_name_td_dev = document.createElement('div');
+                full_name_td_dev.innerText = item.full_name;
+                full_name_td_dev.setAttribute('data-id', item.id);
+                full_name_td_dev.addEventListener('click', function (event) {
                     event.target.setAttribute('contenteditable', 'true');
                     event.target.focus();
                 });
-                full_name_td.addEventListener('keydown', function (event) {
+                full_name_td_dev.addEventListener('keydown', function (event) {
                     if (event.keyCode === 13) {
                         event.preventDefault();
                         updatePhonebookFullName(event.target.getAttribute('data-id'), event.target.innerText, function () {
@@ -94,6 +95,7 @@ function loadList() {
                         });
                     }
                 });
+                full_name_td.appendChild(full_name_td_dev);
                 tr.appendChild(full_name_td);
 
                 var numbers_td = document.createElement('td');
