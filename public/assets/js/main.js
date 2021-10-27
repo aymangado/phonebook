@@ -39,6 +39,25 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function updatePhonebookFullName(id, full_name, callback) {
+    post('http://localhost:8000/api.php/update_phonebook_full_name', {
+        "id": id,
+        "full_name": full_name,
+        "numbers": [
+            {
+                "phone_number": "0554323853",
+                "type": "mobile"
+            },
+            {
+                "phone_number": "0113454985",
+                "type": "home"
+            }
+        ]
+    } ,function () {
+        callback();
+    });
+}
+
 function loadList() {
     get('http://localhost:8000/api.php/phonebook', function (response) {
         if (response.length === 0) {
@@ -58,6 +77,19 @@ function loadList() {
 
                 var full_name_td = document.createElement('td');
                 full_name_td.innerText = item.full_name;
+                full_name_td.setAttribute('data-id', item.id);
+                full_name_td.addEventListener('click', function (event) {
+                    event.target.setAttribute('contenteditable', 'true');
+                    event.target.focus();
+                });
+                full_name_td.addEventListener('keydown', function (event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        updatePhonebookFullName(event.target.getAttribute('data-id'), event.target.innerText, function () {
+                            event.target.setAttribute('contenteditable', 'false');
+                        });
+                    }
+                });
                 tr.appendChild(full_name_td);
 
                 var numbers_td = document.createElement('td');

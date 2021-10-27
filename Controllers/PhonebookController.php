@@ -21,4 +21,9 @@ class PhonebookController extends Controller
         (new Database())->deletePhonebook($this->post['id']);
         $this->ajax_response(['status' => true]);
     }
+    public function updatePhonebook()
+    {
+        (new Database())->updatePhonebook($this->post['id'], $this->post['full_name']);
+        $this->ajax_response(['status' => true]);
+    }
 }
