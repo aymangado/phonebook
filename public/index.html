@@ -7,54 +7,55 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-    <div class="top-line"></div>
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <img src="assets/images/phonebook.svg" alt="">
-                <div class="title">Phonebook manager</div>
-                <div class="clearfix"></div>
-            </div>
+<div class="top-line"></div>
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <img src="assets/images/phonebook.svg" alt="">
+            <div class="title">Phonebook manager</div>
             <div class="clearfix"></div>
         </div>
-        <div class="content">
+        <div class="clearfix"></div>
+    </div>
+    <div class="content">
 
-            <div id="phonebook_form">
-                <div class="phonebook-form-content-back">
-                    <div class="phonebook-form-content">
-                        <div class="phonebook-form-close" onclick="closePhonebookForm()">
-                            <img src="assets/images/close.svg" alt="">
-                        </div>
-                        <div class="phonebook-form-body">
-                            <label>
-                                <span>Full name</span>
-                                <input type="text" id="form_full_name">
-                            </label>
+        <div id="phonebook_form">
+            <div class="phonebook-form-content-back">
+                <div class="phonebook-form-content">
+                    <div class="phonebook-form-close" onclick="closePhonebookForm()">
+                        <img src="assets/images/close.svg" alt="">
+                    </div>
+                    <div class="phonebook-form-body">
+                        <label>
+                            <span class="label">Full name</span>
+                            <input type="text" id="form_full_name">
+                            <span class="error" id="form_full_name_error"></span>
+                        </label>
 
-                            <div class="add-new-phonebook-save-button" onclick="savePhonebookForm()">Save</div>
-                            <div class="clearfix"></div>
-                        </div>
+                        <div class="add-new-phonebook-save-button" onclick="savePhonebookForm()">Save</div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-
-            <div class="add-new-phonebook-button" onclick="openPhonebookForm()">Add new</div>
-            <div class="clearfix"></div>
-            <div id="no_phonebook_list">There is no contact in your phonebook</div>
-            <table class="phonebook-list-table" id="phonebook_list_table">
-                <thead>
-                <tr>
-                    <th class="th-id">#</th>
-                    <th>Name</th>
-                    <th>Numbers</th>
-                </tr>
-                </thead>
-                <tbody id="phonebook_list">
-                </tbody>
-            </table>
         </div>
-    </div>
 
-    <script src="assets/js/main.js?r=1"></script>
+        <div class="add-new-phonebook-button" onclick="openPhonebookForm()">Add new</div>
+        <div class="clearfix"></div>
+        <div id="no_phonebook_list">There is no contact in your phonebook</div>
+        <table class="phonebook-list-table" id="phonebook_list_table">
+            <thead>
+            <tr>
+                <th class="th-id">#</th>
+                <th>Name</th>
+                <th>Numbers</th>
+            </tr>
+            </thead>
+            <tbody id="phonebook_list">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>

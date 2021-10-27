@@ -179,9 +179,19 @@ table.phonebook-list-table tfoot td {
     color: #FFFFFF;
 }
 
-#phonebook_form .phonebook-form-content .phonebook-form-body label span {
+#phonebook_form .phonebook-form-content .phonebook-form-body label .label {
     display: block;
     margin-bottom: 5px;
+}
+#phonebook_form .phonebook-form-content .phonebook-form-body label .error {
+    display: none;
+    margin-top: 5px;
+    background-color: #FFD0D0;
+    color: #C93232;
+    padding: 3px 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 #phonebook_form .phonebook-form-content .phonebook-form-body label input[type="text"] {

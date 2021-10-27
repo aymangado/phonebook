@@ -13,11 +13,23 @@ function onLoad(callback) {
         }
     }
 }
+
 function get(url, callback) {
     const Http = new XMLHttpRequest();
     Http.responseType = 'json';
-    Http.open("GET", url);
+    Http.open('GET', url);
     Http.send();
+    Http.onload = function () {
+        callback(Http.response);
+    }
+}
+
+function post(url, json, callback) {
+    const Http = new XMLHttpRequest();
+    // Http.responseType = 'json';
+    Http.open('POST', url);
+    Http.setRequestHeader('Content-Type', 'application/json');
+    Http.send(JSON.stringify(json));
     Http.onload = function () {
         callback(Http.response);
     }
@@ -27,19 +39,12 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function closePhonebookForm() {
-    document.getElementById('phonebook_form').style.display = 'none';
-}
-
-function openPhonebookForm() {
-    document.getElementById('phonebook_form').style.display = 'block';
-}
-
-onLoad(function () {
+function loadList() {
     get('http://localhost:8000/api.php/phonebook', function (response) {
         if (response.length === 0) {
             document.getElementById('no_phonebook_list').style.display = 'block';
         } else {
+            document.getElementById('phonebook_list').innerHTML = '';
             for (var i = 0; i < response.length; i++) {
                 var item = response[i];
 
@@ -66,9 +71,58 @@ onLoad(function () {
                 document.getElementById('phonebook_list').appendChild(tr);
 
                 if (i === response.length - 1) {
-                    document.getElementById('phonebook_list_table').style.display = 'block';
+                    document.getElementById('phonebook_list_table').style.display = 'table';
                 }
             }
         }
     });
+}
+
+function resetForm() {
+    document.getElementById('form_full_name_error').style.display = 'none';
+    document.getElementById('form_full_name_error').innerText = '';
+    document.getElementById('form_full_name').value = '';
+}
+
+function closePhonebookForm() {
+    document.getElementById('phonebook_form').style.display = 'none';
+}
+
+function openPhonebookForm() {
+    document.getElementById('phonebook_form').style.display = 'block';
+    resetForm();
+}
+
+function savePhonebookForm() {
+    document.getElementById('form_full_name_error').style.display = 'none';
+    document.getElementById('form_full_name_error').innerText = '';
+
+    var full_name = document.getElementById('form_full_name').value.trim();
+
+    if (full_name === '') {
+        document.getElementById('form_full_name_error').innerText = 'Please enter the full name';
+        document.getElementById('form_full_name_error').style.display = 'block';
+        return;
+    }
+
+    post('http://localhost:8000/api.php/create_new_phonebook', {
+        "full_name": full_name,
+        "numbers": [
+            {
+                "phone_number": "0554323853",
+                "type": "mobile"
+            },
+            {
+                "phone_number": "0113454985",
+                "type": "home"
+            }
+        ]
+    } ,function () {
+        loadList();
+        closePhonebookForm();
+    });
+}
+
+onLoad(function () {
+    loadList();
 });
