@@ -1,32 +1,34 @@
 * {
     font-family: Arial, sans-serif;
 }
+
 .container {
     min-height: 100px;
     margin: 0 auto;
     width: 100%;
 }
+
 @media (min-width: 576px) {
     .container {
-        max-width:540px
+        max-width: 540px
     }
 }
 
 @media (min-width: 768px) {
     .container {
-        max-width:720px
+        max-width: 720px
     }
 }
 
 @media (min-width: 992px) {
     .container {
-        max-width:960px
+        max-width: 960px
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        max-width:1140px
+        max-width: 1140px
     }
 }
 
@@ -48,14 +50,55 @@
 .container .header .logo {
     float: left;
 }
+
 .container .header .logo img {
     width: 80px;
     float: left;
 }
+
 .container .header .logo .title {
     margin: 0 0 0 10px;
     float: left;
     font-size: 40px;
     padding: 20px 0 0 0;
     color: #1CA46C;
+}
+
+table.phonebook-list-table {
+    border: 2px solid #1CA46C;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+table.phonebook-list-table td, table.phonebook-list-table th {
+    border: 1px solid #1CA46C;
+    padding: 5px 4px;
+}
+table.phonebook-list-table thead th.th-id {
+    width: 40px;
+}
+table.phonebook-list-table tbody td {
+    font-size: 13px;
+}
+table.phonebook-list-table thead {
+    background: #D7EFE5;
+    background: -moz-linear-gradient(top, #e1f3eb 0%, #dbf0e7 66%, #D7EFE5 100%);
+    background: -webkit-linear-gradient(top, #e1f3eb 0%, #dbf0e7 66%, #D7EFE5 100%);
+    background: linear-gradient(to bottom, #e1f3eb 0%, #dbf0e7 66%, #D7EFE5 100%);
+    border-bottom: 3px solid #1CA46C;
+}
+table.phonebook-list-table thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+    text-align: left;
+}
+table.phonebook-list-table tfoot {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    border-top: 3px solid #1CA46C;
+}
+table.phonebook-list-table tfoot td {
+    font-size: 14px;
 }
