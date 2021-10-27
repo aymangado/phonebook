@@ -10,15 +10,15 @@ Simple project to store and manage phone numbers contacts.
     ```sh    
     git clone git@github.com:aymangado/phonebook.git phonebook
     ```
-3. Run the following command in project directory:
+3. Run the following command in project directory, and I recommend you to leave the configurations as it:
    ```ssh
    cp .env.template .env
    ```
-4. Run the following command in project directory:
+4. Run the following command in project directory to start docker containers:
    ```ssh
    ./run start
    ```
-4. Run the following command in project directory:
+4. Run the following command in project directory to import database backup:
    ```ssh
    ./run import_database
    ```
