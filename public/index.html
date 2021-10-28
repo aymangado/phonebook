@@ -32,12 +32,21 @@
                             <span class="error" id="form_full_name_error"></span>
                         </label>
 
-                        <div class="phonebook-form-numbers-list-title">Numbers</div>
-                        <div class="phonebook-form-numbers-list">
+                        <div class="phonebook-form-numbers-list-title">
+                            <span>Numbers</span>
+                            <img src="assets/images/add_white.svg" alt="" onclick="addNumber()">
+                        </div>
+                        <div class="phonebook-form-numbers-list" id="phonebook_form_number_list">
                             <label>
+                                <select>
+                                    <option value="mobile">Mobile</option>
+                                    <option value="home">Home</option>
+                                    <option value="work">Work</option>
+                                </select>
                                 <input type="text" name="number">
+                                <span class="clearfix"></span>
                                 <span class="error"></span>
-                                <img src="assets/images/delete_white.svg" alt="">
+                                <img src="assets/images/delete_white.svg" alt="" onclick="deleteNumber(event)">
                             </label>
                         </div>
 

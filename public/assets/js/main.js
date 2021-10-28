@@ -159,6 +159,28 @@ function deleteContact(id) {
     });
 }
 
+function addNumber() {
+    if (document.getElementById('phonebook_form_number_list').getElementsByTagName('label').length === 10) {
+        alert('You have reach the maximum number of phone numbers');
+    } else {
+        var row = document.getElementById('phonebook_form_number_list').lastElementChild;
+        var cloned_row = row.cloneNode(true);
+        document.getElementById('phonebook_form_number_list').appendChild(cloned_row);
+        document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('select')[0].value = 'mobile';
+        document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('input')[0].value = '';
+    }
+}
+
+function deleteNumber(event) {
+    if (document.getElementById('phonebook_form_number_list').getElementsByTagName('label').length === 1) {
+        var row = document.getElementById('phonebook_form_number_list').lastElementChild;
+        row.getElementsByTagName('select')[0].value = 'mobile';
+        row.getElementsByTagName('input')[0].value = '';
+    } else {
+        event.target.closest('label').remove()
+    }
+}
+
 function savePhonebookForm() {
     document.getElementById('form_full_name_error').style.display = 'none';
     document.getElementById('form_full_name_error').innerText = '';

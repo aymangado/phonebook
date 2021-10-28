@@ -244,6 +244,15 @@ table.phonebook-list-table tfoot td {
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list-title {
     margin: 20px 0 0 0;
 }
+#phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list-title span {
+
+}
+#phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list-title img {
+    float: right;
+    width: 12px;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+}
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list {
     padding: 10px;
     border: #FFFFFF 1px solid;
@@ -254,6 +263,16 @@ table.phonebook-list-table tfoot td {
     position: relative;
     padding-right: 20px;
     display: block;
+    margin-bottom: 5px;
+}
+#phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list label select {
+    border-width: 0;
+    width: 80px;
+    float: left;
+}
+#phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list label input[type="text"] {
+    width: 110px;
+    float: right;
 }
 
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list label img {
