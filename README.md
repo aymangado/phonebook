@@ -2,6 +2,10 @@
 
 Simple project to store and manage phone numbers contacts.
 
+## Description
+
+Phonebook manager without using any (PHP, CSS, JavaScript) packages
+
 ## Installation
 
 
