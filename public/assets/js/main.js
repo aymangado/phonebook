@@ -210,9 +210,6 @@ function savePhonebookForm() {
             has_error = true;
         }
 
-        labels[i].getElementsByClassName('error')[0].innerHTML = '';
-        labels[i].getElementsByClassName('error')[0].style.display = 'none';
-
         if (labels[i].getElementsByTagName('input')[0].value === '') {
             labels[i].getElementsByClassName('error')[0].innerHTML = 'Please enter the phone number';
             labels[i].getElementsByClassName('error')[0].style.display = 'block';
@@ -240,13 +237,13 @@ function savePhonebookForm() {
     }
 }
 
+function startSavePhonebookForm(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        savePhonebookForm();
+    }
+}
+
 onLoad(function () {
     loadList();
-
-    document.getElementById('form_full_name').addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            savePhonebookForm();
-        }
-    });
 });

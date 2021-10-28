@@ -28,7 +28,7 @@
                     <div class="phonebook-form-body">
                         <label>
                             <span class="label">Full name</span>
-                            <input type="text" id="form_full_name">
+                            <input type="text" id="form_full_name" onkeyup="startSavePhonebookForm(event)">
                             <span class="error" id="form_full_name_error"></span>
                         </label>
 
@@ -38,13 +38,13 @@
                         </div>
                         <div class="phonebook-form-numbers-list" id="phonebook_form_number_list">
                             <label>
-                                <select>
+                                <select onkeyup="startSavePhonebookForm(event)">
                                     <option value=""></option>
                                     <option value="mobile">Mobile</option>
                                     <option value="home">Home</option>
                                     <option value="work">Work</option>
                                 </select>
-                                <input type="text" name="number">
+                                <input type="text" name="number" onkeyup="startSavePhonebookForm(event)">
                                 <span class="clearfix"></span>
                                 <span class="error"></span>
                                 <img src="assets/images/delete_white.svg" alt="" onclick="deleteNumber(event)">
