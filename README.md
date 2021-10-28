@@ -52,7 +52,7 @@ Phonebook manager without using any (PHP, CSS, JavaScript) packages.
 7. Open [http://localhost:8000/](http://localhost:8000/) on your browser.
 
 ## How to use
-1. To create a new contact just click on create new contact button in home screen.
+1. To create a new contact just click on create new contact button on the home screen.
 2. To update full name of any contact, just click on the name, and it will be editable area then rename the full name, and press enter button to update it in the database.
 3. To update any number of any contact, just click on the number that you want to update it, and it will be editable area then rename the number, and press enter button to update it in the database.
 4. To update all contact data in form just click on edit button.
