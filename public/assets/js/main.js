@@ -101,7 +101,11 @@ function loadList() {
                 numbers_td.innerText = '';
                 for (var ii = 0; ii < item.phone_numbers.length; ii++) {
                     var number_type_span = document.createElement('span');
-                    number_type_span.innerText = capitalizeFirstLetter(item.phone_numbers[ii]['type']) + ': ';
+                    number_type_span.classList.add('phone-number-type-title')
+                    var number_type_span_span = document.createElement('span');
+                    number_type_span_span.innerText = capitalizeFirstLetter(item.phone_numbers[ii]['type']);
+                    number_type_span.appendChild(number_type_span_span);
+                    number_type_span.append(': ')
                     var number_span = document.createElement('span');
                     number_span.innerText = item.phone_numbers[ii]['phone_number'];
                     number_span.setAttribute('data-id', item.phone_numbers[ii]['id']);

@@ -118,6 +118,10 @@ table.phonebook-list-table tbody td {
     font-size: 1rem;
 }
 
+table.phonebook-list-table tbody td .phone-number-type-title span {
+    text-decoration: underline;
+}
+
 table.phonebook-list-table tbody td div[contenteditable] {
     /*outline: 0 solid transparent;*/
 }
