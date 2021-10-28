@@ -100,7 +100,13 @@ table.phonebook-list-table thead th.th-id {
     width: 40px;
 }
 table.phonebook-list-table thead th.th-manage {
-    width: 30px;
+    width: 50px;
+}
+table.phonebook-list-table thead th.th-numbers {
+    width: 160px;
+}
+table.phonebook-list-table thead th.th-updated-at {
+    width: 140px;
 }
 table.phonebook-list-table tbody td {
     font-size: 13px;
@@ -109,8 +115,15 @@ table.phonebook-list-table tbody td div[contenteditable] {
     /*outline: 0 solid transparent;*/
 }
 table.phonebook-list-table tbody td .delete-button {
-    width: 20px;
     cursor: pointer;
+    width: 16px;
+    float: right;
+}
+table.phonebook-list-table tbody td .edit-button {
+    cursor: pointer;
+    width: 16px;
+    float: right;
+    margin-right: 8px;
 }
 table.phonebook-list-table thead {
     background: #D7EFE5;

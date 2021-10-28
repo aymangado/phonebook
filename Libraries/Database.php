@@ -35,6 +35,32 @@ class Database
         return $list;
     }
 
+    public function getPhonebook($id)
+    {
+        $statement = $this->pdo->prepare('SELECT * FROM phonebook where id = :id');
+
+        $statement->bindParam(':id', $id);
+
+        $statement->execute();
+
+        $item = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$item) {
+            return [];
+        }
+
+        $statement = $this->pdo->prepare('SELECT * FROM phone_numbers where phonebook_id = :phonebook_id');
+
+        $statement->bindParam(':phonebook_id', $item['id']);
+
+        $statement->execute();
+
+        $phone_numbers = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $item['phone_numbers'] = $phone_numbers;
+        return $item;
+    }
+
     public function deletePhonebook($id)
     {
         $statement = $this->pdo->prepare('DELETE FROM phonebook WHERE id = :id');
@@ -81,6 +107,49 @@ class Database
             }
             $statement->execute();
         }
+    }
+
+    public function updatePhonebookAndNumbers($id, $full_name, $numbersList)
+    {
+        $statement = $this->pdo->prepare('SELECT * FROM phonebook where id = :id');
+
+        $statement->bindParam(':id', $id);
+
+        $statement->execute();
+
+        $item = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$item) {
+            return false;
+        }
+
+        $statement = $this->pdo->prepare('UPDATE phonebook SET full_name = :full_name WHERE id = :id');
+        $statement->bindParam(':id', $item['id'], PDO::PARAM_INT);
+        $statement->bindParam(':full_name', $full_name);
+        $statement->execute();
+
+        $statement = $this->pdo->prepare('DELETE FROM phone_numbers WHERE phonebook_id = :phonebook_id');
+        $statement->bindParam(':phonebook_id', $item['id'], PDO::PARAM_INT);
+        $statement->execute();
+
+        $phonebook_id = $item['id'];
+        $values = [];
+        $binds = [];
+        foreach ($numbersList as $key => $item) {
+            $values[] = "(:phonebook_id_{$key},:phone_number_{$key}, :type_{$key})";
+            $binds["phonebook_id_{$key}"] = $phonebook_id;
+            $binds["phone_number_{$key}"] = $item['phone_number'];
+            $binds["type_{$key}"] = $item['type'];
+        }
+        if (!empty($values) && !empty($binds)) {
+            $statement = $this->pdo->prepare('INSERT INTO phone_numbers (phonebook_id, phone_number, type) VALUES' . implode(',', $values));
+            foreach ($binds as $key => $value) {
+                $statement->bindValue($key, $value);
+            }
+            $statement->execute();
+        }
+
+        return true;
     }
 
     public function __destruct()

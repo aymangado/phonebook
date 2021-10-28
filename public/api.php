@@ -29,6 +29,10 @@ function fire()
         (new Controllers\PhonebookController)->updatePhonebook();
     } else if (end($uri_parts) == 'update_phonebook_number' AND $request_method === 'post') {
         (new Controllers\PhonebookController)->updatePhonebookNumber();
+    } else if (end($uri_parts) == 'get_phonebook' AND $request_method === 'post') {
+        (new Controllers\PhonebookController)->getPhonebook();
+    } else if (end($uri_parts) == 'update_phonebook_and_numbers' AND $request_method === 'post') {
+        (new Controllers\PhonebookController)->updatePhonebookAndNumbers();
     }
 }
 

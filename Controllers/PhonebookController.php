@@ -11,24 +11,39 @@ class PhonebookController extends Controller
     {
         $this->ajax_response((new Database())->phoneBookList());
     }
+
     public function createNewPhonebook()
     {
         (new Database())->insertPhoneBook($this->post['full_name'], $this->post['numbers']);
         $this->ajax_response(['status' => true]);
     }
+
     public function deletePhonebook()
     {
         (new Database())->deletePhonebook($this->post['id']);
         $this->ajax_response(['status' => true]);
     }
+
     public function updatePhonebook()
     {
         (new Database())->updatePhonebook($this->post['id'], $this->post['full_name']);
         $this->ajax_response(['status' => true]);
     }
+
+    public function updatePhonebookAndNumbers()
+    {
+        (new Database())->updatePhonebookAndNumbers($this->post['id'], $this->post['full_name'], $this->post['numbers']);
+        $this->ajax_response(['status' => true]);
+    }
+
     public function updatePhonebookNumber()
     {
         (new Database())->updatePhonebookNumber($this->post['id'], $this->post['number']);
         $this->ajax_response(['status' => true]);
+    }
+
+    public function getPhonebook()
+    {
+        $this->ajax_response((new Database())->getPhonebook($this->post['id']));
     }
 }

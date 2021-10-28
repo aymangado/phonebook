@@ -28,6 +28,7 @@
                     <div class="phonebook-form-body">
                         <label>
                             <span class="label">Full name</span>
+                            <input type="hidden" id="form_phonebook_id">
                             <input type="text" id="form_full_name" onkeyup="startSavePhonebookForm(event)">
                             <span class="error" id="form_full_name_error"></span>
                         </label>
@@ -66,8 +67,8 @@
             <tr>
                 <th class="th-id">#</th>
                 <th>Name</th>
-                <th>Numbers</th>
-                <th>Updated at</th>
+                <th class="th-numbers">Numbers</th>
+                <th class="th-updated-at">Updated at</th>
                 <th class="th-manage"></th>
             </tr>
             </thead>

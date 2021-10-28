@@ -137,8 +137,16 @@ function loadList() {
                 delete_button.addEventListener('click', function (event) {
                     deleteContact(event.target.getAttribute('data-id'));
                 });
-                delete_button.src = 'assets/images/delete.svg';
+                delete_button.src = 'assets/images/delete.png';
                 manage_td.appendChild(delete_button);
+                var edit_button = document.createElement('img');
+                edit_button.classList.add('edit-button');
+                edit_button.setAttribute('data-id', item.id);
+                edit_button.addEventListener('click', function (event) {
+                    editContact(event.target.getAttribute('data-id'));
+                });
+                edit_button.src = 'assets/images/edit.png';
+                manage_td.appendChild(edit_button);
                 tr.appendChild(manage_td);
 
                 document.getElementById('phonebook_list').appendChild(tr);
@@ -155,6 +163,14 @@ function resetForm() {
     document.getElementById('form_full_name_error').style.display = 'none';
     document.getElementById('form_full_name_error').innerText = '';
     document.getElementById('form_full_name').value = '';
+    document.getElementById('form_phonebook_id').value = '';
+
+    var row = document.getElementById('phonebook_form_number_list').lastElementChild;
+    var cloned_row = row.cloneNode(true);
+    document.getElementById('phonebook_form_number_list').innerHTML = '';
+    document.getElementById('phonebook_form_number_list').appendChild(cloned_row);
+    document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('select')[0].value = '';
+    document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('input')[0].value = '';
 }
 
 function closePhonebookForm() {
@@ -243,14 +259,46 @@ function savePhonebookForm() {
     }
 
     if (done_labels_loop && !has_error) {
-        post('http://localhost:8000/api.php/create_new_phonebook', {
-            "full_name": full_name,
-            "numbers": numbers,
-        }, function () {
-            loadList();
-            closePhonebookForm();
-        });
+        if (document.getElementById('form_phonebook_id').value.trim() === '') {
+            post('http://localhost:8000/api.php/create_new_phonebook', {
+                "full_name": full_name,
+                "numbers": numbers,
+            }, function () {
+                loadList();
+                closePhonebookForm();
+            });
+        } else {
+            post('http://localhost:8000/api.php/update_phonebook_and_numbers', {
+                "id": document.getElementById('form_phonebook_id').value.trim(),
+                "full_name": full_name,
+                "numbers": numbers,
+            }, function () {
+                loadList();
+                closePhonebookForm();
+            });
+        }
     }
+}
+
+function editContact(id) {
+    post('http://localhost:8000/api.php/get_phonebook', {
+        'id': id,
+    }, function (response) {
+        openPhonebookForm();
+        response = JSON.parse(response);
+        document.getElementById('form_full_name').value = response.full_name;
+        document.getElementById('form_phonebook_id').value = response.id;
+
+        for (var i = 0; i < response.phone_numbers.length; i++) {
+            if (i > 0) {
+                var row = document.getElementById('phonebook_form_number_list').lastElementChild;
+                var cloned_row = row.cloneNode(true);
+                document.getElementById('phonebook_form_number_list').appendChild(cloned_row);
+            }
+            document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('select')[0].value = response.phone_numbers[i].type;
+            document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('input')[0].value = response.phone_numbers[i].phone_number;
+        }
+    });
 }
 
 function startSavePhonebookForm(event) {
