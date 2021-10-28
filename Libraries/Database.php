@@ -123,31 +123,34 @@ class Database
             return false;
         }
 
-        $statement = $this->pdo->prepare('UPDATE phonebook SET full_name = :full_name WHERE id = :id');
-        $statement->bindParam(':id', $item['id'], PDO::PARAM_INT);
-        $statement->bindParam(':full_name', $full_name);
-        $statement->execute();
-
         $statement = $this->pdo->prepare('DELETE FROM phone_numbers WHERE phonebook_id = :phonebook_id');
         $statement->bindParam(':phonebook_id', $item['id'], PDO::PARAM_INT);
         $statement->execute();
 
+        $now = db_now();
         $phonebook_id = $item['id'];
         $values = [];
         $binds = [];
         foreach ($numbersList as $key => $item) {
-            $values[] = "(:phonebook_id_{$key},:phone_number_{$key}, :type_{$key})";
+            $values[] = "(:phonebook_id_{$key},:phone_number_{$key}, :type_{$key}, :updated_date_{$key})";
             $binds["phonebook_id_{$key}"] = $phonebook_id;
             $binds["phone_number_{$key}"] = $item['phone_number'];
             $binds["type_{$key}"] = $item['type'];
+            $binds["updated_date_{$key}"] = $now;
         }
         if (!empty($values) && !empty($binds)) {
-            $statement = $this->pdo->prepare('INSERT INTO phone_numbers (phonebook_id, phone_number, type) VALUES' . implode(',', $values));
+            $statement = $this->pdo->prepare('INSERT INTO phone_numbers (phonebook_id, phone_number, type, updated_date) VALUES' . implode(',', $values));
             foreach ($binds as $key => $value) {
                 $statement->bindValue($key, $value);
             }
             $statement->execute();
         }
+
+        $statement = $this->pdo->prepare('UPDATE phonebook SET full_name = :full_name, updated_date = :now WHERE id = :id');
+        $statement->bindParam(':id', $phonebook_id, PDO::PARAM_INT);
+        $statement->bindParam(':full_name', $full_name);
+        $statement->bindParam(':now', $now);
+        $statement->execute();
 
         return true;
     }
