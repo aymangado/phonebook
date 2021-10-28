@@ -166,7 +166,7 @@ function addNumber() {
         var row = document.getElementById('phonebook_form_number_list').lastElementChild;
         var cloned_row = row.cloneNode(true);
         document.getElementById('phonebook_form_number_list').appendChild(cloned_row);
-        document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('select')[0].value = 'mobile';
+        document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('select')[0].value = '';
         document.getElementById('phonebook_form_number_list').lastElementChild.getElementsByTagName('input')[0].value = '';
     }
 }
@@ -174,7 +174,7 @@ function addNumber() {
 function deleteNumber(event) {
     if (document.getElementById('phonebook_form_number_list').getElementsByTagName('label').length === 1) {
         var row = document.getElementById('phonebook_form_number_list').lastElementChild;
-        row.getElementsByTagName('select')[0].value = 'mobile';
+        row.getElementsByTagName('select')[0].value = '';
         row.getElementsByTagName('input')[0].value = '';
     } else {
         event.target.closest('label').remove()
@@ -182,6 +182,9 @@ function deleteNumber(event) {
 }
 
 function savePhonebookForm() {
+    var has_error = false;
+    var done_labels_loop = false;
+
     document.getElementById('form_full_name_error').style.display = 'none';
     document.getElementById('form_full_name_error').innerText = '';
 
@@ -190,25 +193,51 @@ function savePhonebookForm() {
     if (full_name === '') {
         document.getElementById('form_full_name_error').innerText = 'Please enter the full name';
         document.getElementById('form_full_name_error').style.display = 'block';
-        return;
+        has_error = true;
     }
 
-    post('http://localhost:8000/api.php/create_new_phonebook', {
-        "full_name": full_name,
-        "numbers": [
-            {
-                "phone_number": "0554323853",
-                "type": "mobile"
-            },
-            {
-                "phone_number": "0113454985",
-                "type": "home"
-            }
-        ]
-    } ,function () {
-        loadList();
-        closePhonebookForm();
-    });
+    var labels = document.getElementById('phonebook_form_number_list').getElementsByTagName('label');
+
+    var numbers = [];
+
+    for (i = 0; i < labels.length; i++) {
+        labels[i].getElementsByClassName('error')[0].innerHTML = '';
+        labels[i].getElementsByClassName('error')[0].style.display = 'none';
+
+        if (labels[i].getElementsByTagName('select')[0].value === '') {
+            labels[i].getElementsByClassName('error')[0].innerHTML = 'Please select the phone type';
+            labels[i].getElementsByClassName('error')[0].style.display = 'block';
+            has_error = true;
+        }
+
+        labels[i].getElementsByClassName('error')[0].innerHTML = '';
+        labels[i].getElementsByClassName('error')[0].style.display = 'none';
+
+        if (labels[i].getElementsByTagName('input')[0].value === '') {
+            labels[i].getElementsByClassName('error')[0].innerHTML = 'Please enter the phone number';
+            labels[i].getElementsByClassName('error')[0].style.display = 'block';
+            has_error = true;
+        }
+
+        numbers.push({
+            type: labels[i].getElementsByTagName('select')[0].value,
+            phone_number: labels[i].getElementsByTagName('input')[0].value,
+        });
+
+        if (i === labels.length - 1) {
+            done_labels_loop = true;
+        }
+    }
+
+    if (done_labels_loop && !has_error) {
+        post('http://localhost:8000/api.php/create_new_phonebook', {
+            "full_name": full_name,
+            "numbers": numbers,
+        }, function () {
+            loadList();
+            closePhonebookForm();
+        });
+    }
 }
 
 onLoad(function () {

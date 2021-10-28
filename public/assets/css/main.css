@@ -173,9 +173,9 @@ table.phonebook-list-table tfoot td {
 
 #phonebook_form .phonebook-form-content-back {
     margin: 0 auto;
-    max-width: 300px;
+    max-width: 350px;
     background-color: rgba(0, 0, 0, .1);
-    padding: 20px;
+    padding: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
@@ -219,6 +219,7 @@ table.phonebook-list-table tfoot td {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    font-size: .8rem;
 }
 
 #phonebook_form .phonebook-form-content .phonebook-form-body label input[type="text"] {
@@ -271,7 +272,7 @@ table.phonebook-list-table tfoot td {
     float: left;
 }
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list label input[type="text"] {
-    width: 110px;
+    width: 150px;
     float: right;
 }
 
