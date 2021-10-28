@@ -1,6 +1,6 @@
 # Phonebook manager
 
-Simple project to store and manage phone numbers contacts.
+Simple project to store and manage contacts.
 
 ## Description
 
