@@ -4,7 +4,7 @@ Simple project to store and manage contacts.
 
 ## Description
 
-Phonebook manager without using any (PHP, CSS, JavaScript) packages
+Phonebook manager without using any (PHP, CSS, JavaScript) packages.
 
 ## Installation
 
