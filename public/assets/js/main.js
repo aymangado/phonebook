@@ -1,10 +1,10 @@
 function onLoad(callback) {
-    if(window.attachEvent) {
+    if (window.attachEvent) {
         window.attachEvent('onload', callback);
     } else {
-        if(window.onload) {
+        if (window.onload) {
             var currentOnload = window.onload;
-            window.onload = function(evt) {
+            window.onload = function (evt) {
                 currentOnload(evt);
                 callback(evt);
             };
@@ -47,7 +47,7 @@ function updatePhonebookFullName(id, full_name, callback) {
     post('http://localhost:8000/api.php/update_phonebook_full_name', {
         "id": id,
         "full_name": full_name,
-    } ,function () {
+    }, function () {
         callback();
     });
 }
@@ -56,7 +56,7 @@ function updatePhonebookNumber(id, number, callback) {
     post('http://localhost:8000/api.php/update_phonebook_number', {
         "id": id,
         "number": number,
-    } ,function () {
+    }, function () {
         callback();
     });
 }

@@ -73,6 +73,7 @@ body {
     .container .header .logo img {
         width: 60px;
     }
+
     .container .header .logo .title {
         font-size: 26px;
         margin-left: 5px;
@@ -85,6 +86,7 @@ table.phonebook-list-table {
     text-align: left;
     border-collapse: collapse;
 }
+
 table.phonebook-list-table td, table.phonebook-list-table th {
     border: 1px solid #1CA46C;
     padding: 5px 4px;
@@ -99,32 +101,40 @@ table.phonebook-list-table td, table.phonebook-list-table th {
 table.phonebook-list-table thead th.th-id {
     width: 40px;
 }
+
 table.phonebook-list-table thead th.th-manage {
     width: 50px;
 }
+
 table.phonebook-list-table thead th.th-numbers {
     width: 160px;
 }
+
 table.phonebook-list-table thead th.th-updated-at {
     width: 140px;
 }
+
 table.phonebook-list-table tbody td {
     font-size: 13px;
 }
+
 table.phonebook-list-table tbody td div[contenteditable] {
     /*outline: 0 solid transparent;*/
 }
+
 table.phonebook-list-table tbody td .delete-button {
     cursor: pointer;
     width: 16px;
     float: right;
 }
+
 table.phonebook-list-table tbody td .edit-button {
     cursor: pointer;
     width: 16px;
     float: right;
     margin-right: 8px;
 }
+
 table.phonebook-list-table thead {
     background: #D7EFE5;
     background: -moz-linear-gradient(top, #e1f3eb 0%, #dbf0e7 66%, #D7EFE5 100%);
@@ -132,18 +142,21 @@ table.phonebook-list-table thead {
     background: linear-gradient(to bottom, #e1f3eb 0%, #dbf0e7 66%, #D7EFE5 100%);
     border-bottom: 3px solid #1CA46C;
 }
+
 table.phonebook-list-table thead th {
     font-size: 15px;
     font-weight: bold;
     color: #000000;
     text-align: left;
 }
+
 table.phonebook-list-table tfoot {
     font-size: 14px;
     font-weight: bold;
     color: #000000;
     border-top: 3px solid #1CA46C;
 }
+
 table.phonebook-list-table tfoot td {
     font-size: 14px;
 }
@@ -223,6 +236,7 @@ table.phonebook-list-table tfoot td {
     display: block;
     margin-bottom: 5px;
 }
+
 #phonebook_form .phonebook-form-content .phonebook-form-body label .error {
     display: none;
     margin-top: 5px;
@@ -258,15 +272,18 @@ table.phonebook-list-table tfoot td {
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list-title {
     margin: 20px 0 0 0;
 }
+
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list-title span {
 
 }
+
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list-title img {
     float: right;
     width: 12px;
     margin: 0 5px 0 0;
     cursor: pointer;
 }
+
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list {
     padding: 10px;
     border: #FFFFFF 1px solid;
@@ -279,11 +296,13 @@ table.phonebook-list-table tfoot td {
     display: block;
     margin-bottom: 5px;
 }
+
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list label select {
     border-width: 0;
     width: 80px;
     float: left;
 }
+
 #phonebook_form .phonebook-form-content .phonebook-form-body .phonebook-form-numbers-list label input[type="text"] {
     width: 150px;
     float: right;
