@@ -34,10 +34,10 @@ Phonebook manager without using any (PHP, CSS, JavaScript) packages
 
 ### On windows
 
-1. Rename .env.template to .env in the project root folder.
-2. Open the command line.
-3. Go to project folder from the command line.
-4. Enter the following commands one by one:
+3. Rename .env.template to .env in the project root folder.
+4. Open the command line.
+5. Go to project folder from the command line.
+6. Enter the following commands one by one:
    ```ssh
    cd docker
    ```
@@ -49,7 +49,7 @@ Phonebook manager without using any (PHP, CSS, JavaScript) packages
    ```ssh
    docker-compose --env-file ../.env -p phonebook exec mysql bash -c "/import_database_backup.sh"
    ```
-5. Open [http://localhost:8000/](http://localhost:8000/) on your browser.
+7. Open [http://localhost:8000/](http://localhost:8000/) on your browser.
 
 ## How to use
 1. To create a new contact just click on create new contact button in home screen.
