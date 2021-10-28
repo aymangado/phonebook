@@ -136,17 +136,14 @@ table.phonebook-list-table tbody td .edit-button {
 }
 
 table.phonebook-list-table thead {
-    background: #D7EFE5;
-    background: -moz-linear-gradient(top, #e1f3eb 0%, #dbf0e7 66%, #D7EFE5 100%);
-    background: -webkit-linear-gradient(top, #e1f3eb 0%, #dbf0e7 66%, #D7EFE5 100%);
-    background: linear-gradient(to bottom, #e1f3eb 0%, #dbf0e7 66%, #D7EFE5 100%);
-    border-bottom: 3px solid #1CA46C;
+    background: #1CA46C;
+    border-bottom: 2px solid #1CA46C;
 }
 
 table.phonebook-list-table thead th {
     font-size: 15px;
     font-weight: bold;
-    color: #000000;
+    color: #FFFFFF;
     text-align: left;
 }
 
