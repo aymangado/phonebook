@@ -46,3 +46,8 @@ Simple project to store and manage phone numbers contacts.
    docker-compose --env-file ../.env -p phonebook exec mysql bash -c "/import_database_backup.sh"
    ```
 5. Open [http://localhost:8000/](http://localhost:8000/) on your browser.
+
+## How to use
+1. To create a new contact just click on create new contact button in home screen.
+2. To update full name of any contact, just click on the name, and it will be editable area then rename the full name, and press enter button to update it in the database.
+3. To update any number of any contact, just click on the number that you want to update it, and it will be editable area then rename the number, and press enter button to update it in the database.
