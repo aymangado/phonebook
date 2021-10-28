@@ -131,6 +131,11 @@ table.phonebook-list-table tbody td .delete-button {
     cursor: pointer;
     width: 16px;
     float: right;
+    transition: all 350ms ease;
+}
+
+table.phonebook-list-table tbody td .delete-button:hover {
+    filter: grayscale(100%);
 }
 
 table.phonebook-list-table tbody td .edit-button {
@@ -138,6 +143,11 @@ table.phonebook-list-table tbody td .edit-button {
     width: 16px;
     float: right;
     margin-right: 8px;
+    transition: all 350ms ease;
+}
+
+table.phonebook-list-table tbody td .edit-button:hover {
+    filter: grayscale(100%);
 }
 
 table.phonebook-list-table thead {
@@ -175,6 +185,7 @@ table.phonebook-list-table tfoot td {
     margin: 0 0 10px 0;
     float: right;
     cursor: pointer;
+    transition: background-color 350ms ease;
 }
 
 .add-new-phonebook-button:hover {
