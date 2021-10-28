@@ -26,4 +26,9 @@ class PhonebookController extends Controller
         (new Database())->updatePhonebook($this->post['id'], $this->post['full_name']);
         $this->ajax_response(['status' => true]);
     }
+    public function updatePhonebookNumber()
+    {
+        (new Database())->updatePhonebookNumber($this->post['id'], $this->post['number']);
+        $this->ajax_response(['status' => true]);
+    }
 }

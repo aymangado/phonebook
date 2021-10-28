@@ -47,16 +47,15 @@ function updatePhonebookFullName(id, full_name, callback) {
     post('http://localhost:8000/api.php/update_phonebook_full_name', {
         "id": id,
         "full_name": full_name,
-        "numbers": [
-            {
-                "phone_number": "0554323853",
-                "type": "mobile"
-            },
-            {
-                "phone_number": "0113454985",
-                "type": "home"
-            }
-        ]
+    } ,function () {
+        callback();
+    });
+}
+
+function updatePhonebookNumber(id, number, callback) {
+    post('http://localhost:8000/api.php/update_phonebook_number', {
+        "id": id,
+        "number": number,
     } ,function () {
         callback();
     });
@@ -101,10 +100,27 @@ function loadList() {
                 var numbers_td = document.createElement('td');
                 numbers_td.innerText = '';
                 for (var ii = 0; ii < item.phone_numbers.length; ii++) {
-                    numbers_td.innerText += capitalizeFirstLetter(item.phone_numbers[ii]['type']) + ': ' + item.phone_numbers[ii]['phone_number'];
-                    if (ii < item.phone_numbers.length - 1) {
-                        numbers_td.innerText += ' || ';
-                    }
+                    var number_type_span = document.createElement('span');
+                    number_type_span.innerText = capitalizeFirstLetter(item.phone_numbers[ii]['type']) + ': ';
+                    var number_span = document.createElement('span');
+                    number_span.innerText = item.phone_numbers[ii]['phone_number'];
+                    number_span.setAttribute('data-id', item.phone_numbers[ii]['id']);
+                    number_span.addEventListener('click', function (event) {
+                        event.target.setAttribute('contenteditable', 'true');
+                        event.target.focus();
+                    });
+                    number_span.addEventListener('keydown', function (event) {
+                        if (event.keyCode === 13) {
+                            event.preventDefault();
+                            updatePhonebookNumber(event.target.getAttribute('data-id'), event.target.innerText, function () {
+                                event.target.setAttribute('contenteditable', 'false');
+                            });
+                        }
+                    });
+                    var number_div = document.createElement('div');
+                    number_div.appendChild(number_type_span);
+                    number_div.appendChild(number_span);
+                    numbers_td.appendChild(number_div);
                 }
                 tr.appendChild(numbers_td);
 

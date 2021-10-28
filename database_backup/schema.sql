@@ -4,7 +4,7 @@ CREATE TABLE `phone_numbers`
 (
     `id`           int(9) NOT NULL AUTO_INCREMENT,
     `phonebook_id` int(9) unsigned NOT NULL,
-    `phone_number` int(9) unsigned NOT NULL,
+    `phone_number` varchar(20) NOT NULL,
     `type`         varchar(100) NOT NULL,
     `created_date` timestamp    NOT NULL DEFAULT current_timestamp(),
     `updated_date` timestamp    NOT NULL DEFAULT current_timestamp(),

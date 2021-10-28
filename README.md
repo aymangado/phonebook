@@ -4,12 +4,15 @@ Simple project to store and manage phone numbers contacts.
 
 ## Installation
 
+
 1. Make sure you have Docker Compose installed: https://docs.docker.com/compose/
 
 2. Clone this repo locally by running the following command:
     ```sh    
     git clone git@github.com:aymangado/phonebook.git phonebook
     ```
+### On linux and macOS
+
 3. Run the following command in project directory, and I recommend you to leave the configurations as it:
    ```ssh
    cp .env.template .env
@@ -18,8 +21,28 @@ Simple project to store and manage phone numbers contacts.
    ```ssh
    ./run start
    ```
-4. Run the following command in project directory to import database backup:
+5. Run the following command in project directory to import database backup:
    ```ssh
    ./run import_database
+   ```
+6. Open [http://localhost:8000/](http://localhost:8000/) on your browser.
+
+
+### On windows
+
+1. Rename .env.template to .env in the project root folder.
+2. Open the command line.
+3. Go to project folder from the command line.
+4. Enter the following commands one by one:
+   ```ssh
+   cd docker
+   ```
+   
+   ```ssh
+   docker-compose --env-file ../.env -p phonebook up -d
+   ```
+   
+   ```ssh
+   docker-compose --env-file ../.env -p phonebook exec mysql bash -c "/import_database_backup.sh"
    ```
 5. Open [http://localhost:8000/](http://localhost:8000/) on your browser.

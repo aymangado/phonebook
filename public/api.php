@@ -27,6 +27,8 @@ function fire()
         (new Controllers\PhonebookController)->deletePhonebook();
     } else if (end($uri_parts) == 'update_phonebook_full_name' AND $request_method === 'post') {
         (new Controllers\PhonebookController)->updatePhonebook();
+    } else if (end($uri_parts) == 'update_phonebook_number' AND $request_method === 'post') {
+        (new Controllers\PhonebookController)->updatePhonebookNumber();
     }
 }
 

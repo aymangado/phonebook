@@ -54,6 +54,14 @@ class Database
         $statement->execute();
     }
 
+    public function updatePhonebookNumber($id, $number)
+    {
+        $statement = $this->pdo->prepare('UPDATE phone_numbers SET phone_number = :number WHERE id = :id');
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->bindParam(':number', $number);
+        $statement->execute();
+    }
+
     public function insertPhoneBook($name, $numbersList)
     {
         $this->pdo->prepare('INSERT INTO phonebook (full_name) VALUES (?)')->execute([$name]);

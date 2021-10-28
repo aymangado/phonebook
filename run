@@ -21,7 +21,7 @@ declare -a optionsForHelp
 - "Recreate_containers_then_start"        "cd docker && docker-compose --env-file ../.env -p ${project_name} up --force-recreate -d"
 - "Pause"                                 "cd docker && docker-compose --env-file ../.env -p ${project_name} pause"
 - "Resume"                                "cd docker && docker-compose --env-file ../.env -p ${project_name} unpause"
-- "Import_database"                       "cd docker && docker-compose --env-file ../.env -p ${project_name} exec mysql bash -c \"/wait.sh\""
+- "Import_database"                       "cd docker && docker-compose --env-file ../.env -p ${project_name} exec mysql bash -c \"/import_database_backup.sh\""
 - "Remove_data_directory"                 "rm -Rf docker/data"
 #####################################################################################################################
 
