@@ -209,6 +209,9 @@ table.phonebook-list-table tfoot td {
     right: 0;
     display: none;
 }
+#phonebook_form.open {
+    display: block;
+}
 
 #phonebook_form .phonebook-form-content-back {
     margin: 0 auto;

@@ -178,11 +178,11 @@ function resetForm() {
 }
 
 function closePhonebookForm() {
-    document.getElementById('phonebook_form').style.display = 'none';
+    document.getElementById('phonebook_form').classList.remove('open');
 }
 
 function openPhonebookForm() {
-    document.getElementById('phonebook_form').style.display = 'block';
+    document.getElementById('phonebook_form').classList.add('open');
     resetForm();
     document.getElementById('form_full_name').focus();
 }
