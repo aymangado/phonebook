@@ -1,6 +1,7 @@
 version: '3'
 services:
     web:
+        container_name: phonebook_web
         image: nginx:1.21.3
         volumes:
             - "./etc/nginx/default.template.conf:/etc/nginx/conf.d/default.template"
@@ -20,6 +21,7 @@ services:
             - mysql
 
     php:
+        container_name: phonebook_php
         image: nanoninja/php-fpm:7.4.10
         restart: "no"
         volumes:
@@ -27,6 +29,7 @@ services:
             - "../:/var/www/html"
 
     mysql:
+        container_name: phonebook_mysql
         build:
               context: ./mysql
         restart: "no"
